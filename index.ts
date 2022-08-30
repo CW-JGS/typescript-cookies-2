@@ -1,5 +1,6 @@
 import './style.css';
 import { Cookie } from './models/Cookie';
+import { Colours } from './models/Colours';
 let cookieArray: Cookie[];
 const btn1 = document.querySelector("#changeColour-btn");
 btn1.addEventListener("click", () => {
@@ -13,6 +14,10 @@ const addCookie = document.getElementById("addCookie-btn")
 addCookie.addEventListener("click", () => {
   bake();
 });
+const addSprinkleCookie = document.getElementById("addSprinkleCookie-btn");
+addSprinkleCookie.addEventListener("click", ()=> {
+  bakeSprinkled();
+})
 const eatCookie = document.getElementById("eatCookie-btn");
 eatCookie.addEventListener("click", ()=> {
   eat();
@@ -26,7 +31,7 @@ function init() {
     cookieArray = [new Cookie(`cookie${i+1}`), ...cookieArray];
   }
   addOptions();
-  cci.value = cookieArray[0].colour;
+  cci.value = cookieArray[0].colour.toString();
   updateDisplay();
 }
 function drawCookies() {
@@ -41,7 +46,9 @@ function drawCookies() {
   })  
 }
 function changeColour(_selectedCookie = dropdown.selectedIndex, _colour = cci.value) {
-  cookieArray[_selectedCookie].colour = _colour
+  let colour = _colour.charAt(0).toUpperCase() + _colour.slice(1);
+  console.log(colour)
+  cookieArray[_selectedCookie].colour = Colours[colour as Colours]
   updateDisplay();
 }
 function addChocolateChip(_selectedCookie = dropdown.selectedIndex) {
@@ -55,6 +62,11 @@ function eat() {
 function bake()
 {
   cookieArray.push(new Cookie("cookieName"))
+  updateDisplay();
+}
+function bakeSprinkled()
+{
+  cookieArray.push(new Cookie("sprinkleCookie"))
   updateDisplay();
 }
 function addOptions()

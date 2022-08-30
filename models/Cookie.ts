@@ -1,10 +1,12 @@
+import { Colours } from "./Colours";
+
 export class Cookie {
   name: string;
-  colour;
+  colour : Colours;
   chocolateChipNum;
   constructor(_paramName: string) {
     this.name = _paramName;
-    this.colour = 'brown';
+    this.colour = Colours.Brown;
     this.chocolateChipNum = 0;
   }
 }
